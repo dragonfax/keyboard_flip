@@ -114,10 +114,16 @@ CGEventRef eventTapFunction(CGEventTapProxy proxy, CGEventType type, CGEventRef 
   printf("eventTap triggered\n");
 
   if ( isSpacePressed(type,event)  ) {
-    isSpaceDown = YES;
-    nonSpaceTyped = NO;
-    // TODO We dont send space until its released.
-    return event;
+
+    if ( isSpaceDown ) {
+      // Ignore repeated space-down events.
+      return NULL;
+    } else {
+      isSpaceDown = YES;
+      nonSpaceTyped = NO;
+      // TODO We dont send space until its released.
+      return event;
+    }
   } else if ( isSpaceReleased(type,event) ) {
     isSpaceDown = NO;
     if ( nonSpaceTyped ) {
