@@ -110,6 +110,8 @@ CGEventRef flip(CGEventRef event) {
   return event;
 }
 
+CGEventSourceRef src;
+
 CGEventRef eventTapFunction(CGEventTapProxy proxy, CGEventType type, CGEventRef event, void *refcon) {
   printf("eventTap triggered\n");
 
@@ -122,7 +124,7 @@ CGEventRef eventTapFunction(CGEventTapProxy proxy, CGEventType type, CGEventRef 
       isSpaceDown = YES;
       nonSpaceTyped = NO;
       // TODO We dont send space until its released.
-      return event;
+      return NULL;
     }
   } else if ( isSpaceReleased(type,event) ) {
     isSpaceDown = NO;
@@ -133,7 +135,8 @@ CGEventRef eventTapFunction(CGEventTapProxy proxy, CGEventType type, CGEventRef 
     } else {
 
       // TODO press and release space
-      return event;
+      CGEventRef newEvent = CGEventCreateKeyboardEvent(src, kVK_Space, true);
+      return newEvent;
     }
   } else if ( isSpaceDown ) {
     if ( type == kCGEventKeyDown ) {
@@ -149,6 +152,8 @@ int main(int argc, char** argv) {
   printf("starting\n");
 
   initializeFlipMap();
+
+  src = CGEventSourceCreate(kCGEventSourceStateHIDSystemState);
 
   machPortRef =  CGEventTapCreate(kCGSessionEventTap,
     kCGTailAppendEventTap,
