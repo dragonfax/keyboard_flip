@@ -1,9 +1,5 @@
-
 #import <Foundation/Foundation.h>
-
 #include <Carbon/Carbon.h>
-
-
 
 CFMachPortRef machPortRef;
 CFRunLoopSourceRef  eventSrc;
@@ -113,7 +109,6 @@ CGEventRef flip(CGEventRef event) {
 CGEventSourceRef src;
 
 CGEventRef eventTapFunction(CGEventTapProxy proxy, CGEventType type, CGEventRef event, void *refcon) {
-  printf("eventTap triggered\n");
 
   if ( isSpacePressed(type,event)  ) {
 
@@ -149,7 +144,6 @@ CGEventRef eventTapFunction(CGEventTapProxy proxy, CGEventType type, CGEventRef 
 }
 
 int main(int argc, char** argv) {
-  printf("starting\n");
 
   initializeFlipMap();
 
@@ -170,23 +164,13 @@ int main(int argc, char** argv) {
       if ( eventSrc == NULL ) {
           printf( "No event run loop src?\n" );
       }else {
-        printf("adding loop\n");
         CFRunLoopRef runLoop =  CFRunLoopGetCurrent(); //GetCFRunLoopFromEventLoop(GetMainEventLoop ()); 
 
         // Get the CFRunLoop primitive for the Carbon Main Event Loop, and add the new event souce
         CFRunLoopAddSource(runLoop, eventSrc, kCFRunLoopDefaultMode);
 
-        printf("loop added\n");
       }
   }
 
-  printf("sleeping\n");
-
-  // [NSThread sleepForTimeInterval:60.0f];   
-
   CFRunLoopRun();
-
-
-  printf("existing\n");
 }
-
