@@ -37,70 +37,86 @@ BOOL isSpaceReleased(CGEventType type, CGEventRef event) {
 }
 
 NSDictionary *flipMap;
+NSDictionary *unflipMap;
 
 void initializeFlipMap() {
-  flipMap = @{
-    [NSNumber numberWithInt:kVK_ANSI_A]: [NSNumber numberWithInt:kVK_ANSI_Semicolon],
-    [NSNumber numberWithInt:kVK_ANSI_S]: [NSNumber numberWithInt:kVK_ANSI_L],
-    [NSNumber numberWithInt:kVK_ANSI_D]: [NSNumber numberWithInt:kVK_ANSI_K],
-    [NSNumber numberWithInt:kVK_ANSI_F]: [NSNumber numberWithInt:kVK_ANSI_J],
-    [NSNumber numberWithInt:kVK_ANSI_G]: [NSNumber numberWithInt:kVK_ANSI_H],
-
-    [NSNumber numberWithInt:kVK_ANSI_V]: [NSNumber numberWithInt:kVK_ANSI_N],
-    [NSNumber numberWithInt:kVK_ANSI_C]: [NSNumber numberWithInt:kVK_ANSI_M],
-    [NSNumber numberWithInt:kVK_ANSI_X]: [NSNumber numberWithInt:kVK_ANSI_Comma],
-    [NSNumber numberWithInt:kVK_ANSI_Z]: [NSNumber numberWithInt:kVK_ANSI_Period],
-
-    [NSNumber numberWithInt:kVK_ANSI_T]: [NSNumber numberWithInt:kVK_ANSI_Y],
-    [NSNumber numberWithInt:kVK_ANSI_R]: [NSNumber numberWithInt:kVK_ANSI_U],
-    [NSNumber numberWithInt:kVK_ANSI_E]: [NSNumber numberWithInt:kVK_ANSI_I],
-    [NSNumber numberWithInt:kVK_ANSI_W]: [NSNumber numberWithInt:kVK_ANSI_O],
-    [NSNumber numberWithInt:kVK_ANSI_Q]: [NSNumber numberWithInt:kVK_ANSI_P],
-
-    [NSNumber numberWithInt:kVK_ANSI_5]: [NSNumber numberWithInt:kVK_ANSI_7],
-    [NSNumber numberWithInt:kVK_ANSI_4]: [NSNumber numberWithInt:kVK_ANSI_8],
-    [NSNumber numberWithInt:kVK_ANSI_3]: [NSNumber numberWithInt:kVK_ANSI_9],
-    [NSNumber numberWithInt:kVK_ANSI_2]: [NSNumber numberWithInt:kVK_ANSI_0],
-    [NSNumber numberWithInt:kVK_ANSI_1]: [NSNumber numberWithInt:kVK_ANSI_Minus],
-    [NSNumber numberWithInt:kVK_ANSI_Grave]: [NSNumber numberWithInt:kVK_ANSI_Equal],
-
-
-    // Reverse them.
-    [NSNumber numberWithInt:kVK_ANSI_Semicolon]: [NSNumber numberWithInt:kVK_ANSI_A],
-    [NSNumber numberWithInt:kVK_ANSI_L]: [NSNumber numberWithInt:kVK_ANSI_S],
-    [NSNumber numberWithInt:kVK_ANSI_K]: [NSNumber numberWithInt:kVK_ANSI_D],
-    [NSNumber numberWithInt:kVK_ANSI_J]: [NSNumber numberWithInt:kVK_ANSI_F],
+  unflipMap = @{
     [NSNumber numberWithInt:kVK_ANSI_H]: [NSNumber numberWithInt:kVK_ANSI_G],
-
-    [NSNumber numberWithInt:kVK_ANSI_N]: [NSNumber numberWithInt:kVK_ANSI_V],
-    [NSNumber numberWithInt:kVK_ANSI_M]: [NSNumber numberWithInt:kVK_ANSI_C],
-    [NSNumber numberWithInt:kVK_ANSI_Comma]: [NSNumber numberWithInt:kVK_ANSI_X],
-    [NSNumber numberWithInt:kVK_ANSI_Period]: [NSNumber numberWithInt:kVK_ANSI_Z],
+    [NSNumber numberWithInt:kVK_ANSI_G]: [NSNumber numberWithInt:kVK_ANSI_F],
+    [NSNumber numberWithInt:kVK_ANSI_F]: [NSNumber numberWithInt:kVK_ANSI_D],
+    [NSNumber numberWithInt:kVK_ANSI_D]: [NSNumber numberWithInt:kVK_ANSI_S],
+    [NSNumber numberWithInt:kVK_ANSI_S]: [NSNumber numberWithInt:kVK_ANSI_A],
+    [NSNumber numberWithInt:kVK_ANSI_A]: [NSNumber numberWithInt:kVK_CapsLock],
 
     [NSNumber numberWithInt:kVK_ANSI_Y]: [NSNumber numberWithInt:kVK_ANSI_T],
-    [NSNumber numberWithInt:kVK_ANSI_U]: [NSNumber numberWithInt:kVK_ANSI_R],
-    [NSNumber numberWithInt:kVK_ANSI_I]: [NSNumber numberWithInt:kVK_ANSI_E],
-    [NSNumber numberWithInt:kVK_ANSI_O]: [NSNumber numberWithInt:kVK_ANSI_W],
-    [NSNumber numberWithInt:kVK_ANSI_P]: [NSNumber numberWithInt:kVK_ANSI_Q],
+    [NSNumber numberWithInt:kVK_ANSI_T]: [NSNumber numberWithInt:kVK_ANSI_R],
+    [NSNumber numberWithInt:kVK_ANSI_R]: [NSNumber numberWithInt:kVK_ANSI_E],
+    [NSNumber numberWithInt:kVK_ANSI_E]: [NSNumber numberWithInt:kVK_ANSI_W],
+    [NSNumber numberWithInt:kVK_ANSI_W]: [NSNumber numberWithInt:kVK_ANSI_Q],
+    [NSNumber numberWithInt:kVK_ANSI_Q]: [NSNumber numberWithInt:kVK_Tab],
 
-    [NSNumber numberWithInt:kVK_ANSI_7]: [NSNumber numberWithInt:kVK_ANSI_5],
-    [NSNumber numberWithInt:kVK_ANSI_8]: [NSNumber numberWithInt:kVK_ANSI_4],
-    [NSNumber numberWithInt:kVK_ANSI_9]: [NSNumber numberWithInt:kVK_ANSI_3],
-    [NSNumber numberWithInt:kVK_ANSI_0]: [NSNumber numberWithInt:kVK_ANSI_2],
-    [NSNumber numberWithInt:kVK_ANSI_Minus]: [NSNumber numberWithInt:kVK_ANSI_1],
-    [NSNumber numberWithInt:kVK_ANSI_Equal]: [NSNumber numberWithInt:kVK_ANSI_Grave]
+    [NSNumber numberWithInt:kVK_ANSI_7]: [NSNumber numberWithInt:kVK_ANSI_6],
+    [NSNumber numberWithInt:kVK_ANSI_6]: [NSNumber numberWithInt:kVK_ANSI_5],
+    [NSNumber numberWithInt:kVK_ANSI_5]: [NSNumber numberWithInt:kVK_ANSI_4],
+    [NSNumber numberWithInt:kVK_ANSI_4]: [NSNumber numberWithInt:kVK_ANSI_3],
+    [NSNumber numberWithInt:kVK_ANSI_3]: [NSNumber numberWithInt:kVK_ANSI_2],
+    [NSNumber numberWithInt:kVK_ANSI_2]: [NSNumber numberWithInt:kVK_ANSI_1],
+    [NSNumber numberWithInt:kVK_ANSI_1]: [NSNumber numberWithInt:kVK_ANSI_Grave],
 
+    [NSNumber numberWithInt:kVK_ANSI_B]: [NSNumber numberWithInt:kVK_ANSI_V],
+    [NSNumber numberWithInt:kVK_ANSI_V]: [NSNumber numberWithInt:kVK_ANSI_C],
+    [NSNumber numberWithInt:kVK_ANSI_C]: [NSNumber numberWithInt:kVK_ANSI_X],
+    [NSNumber numberWithInt:kVK_ANSI_X]: [NSNumber numberWithInt:kVK_ANSI_Z],
+    [NSNumber numberWithInt:kVK_ANSI_Z]: [NSNumber numberWithInt:kVK_Shift],
+  };
+
+  flipMap = @{
+    [NSNumber numberWithInt:kVK_ANSI_G]: [NSNumber numberWithInt:kVK_ANSI_J],
+    [NSNumber numberWithInt:kVK_ANSI_F]: [NSNumber numberWithInt:kVK_ANSI_K],
+    [NSNumber numberWithInt:kVK_ANSI_D]: [NSNumber numberWithInt:kVK_ANSI_L],
+    [NSNumber numberWithInt:kVK_ANSI_S]: [NSNumber numberWithInt:kVK_ANSI_Semicolon],
+    [NSNumber numberWithInt:kVK_ANSI_A]: [NSNumber numberWithInt:kVK_ANSI_Quote],
+    [NSNumber numberWithInt:kVK_CapsLock]: [NSNumber numberWithInt:kVK_Return],
+
+    [NSNumber numberWithInt:kVK_ANSI_T]: [NSNumber numberWithInt:kVK_ANSI_U],
+    [NSNumber numberWithInt:kVK_ANSI_R]: [NSNumber numberWithInt:kVK_ANSI_I],
+    [NSNumber numberWithInt:kVK_ANSI_E]: [NSNumber numberWithInt:kVK_ANSI_O],
+    [NSNumber numberWithInt:kVK_ANSI_W]: [NSNumber numberWithInt:kVK_ANSI_P],
+    [NSNumber numberWithInt:kVK_ANSI_Q]: [NSNumber numberWithInt:kVK_ANSI_LeftBracket],
+    [NSNumber numberWithInt:kVK_Tab]: [NSNumber numberWithInt:kVK_ANSI_RightBracket],
+
+    [NSNumber numberWithInt:kVK_ANSI_6]: [NSNumber numberWithInt:kVK_ANSI_7],
+    [NSNumber numberWithInt:kVK_ANSI_5]: [NSNumber numberWithInt:kVK_ANSI_8],
+    [NSNumber numberWithInt:kVK_ANSI_4]: [NSNumber numberWithInt:kVK_ANSI_9],
+    [NSNumber numberWithInt:kVK_ANSI_3]: [NSNumber numberWithInt:kVK_ANSI_0],
+    [NSNumber numberWithInt:kVK_ANSI_2]: [NSNumber numberWithInt:kVK_ANSI_Minus],
+    [NSNumber numberWithInt:kVK_ANSI_1]: [NSNumber numberWithInt:kVK_ANSI_Equal],
+    [NSNumber numberWithInt:kVK_ANSI_Grave]: [NSNumber numberWithInt:kVK_Delete],
+
+    [NSNumber numberWithInt:kVK_ANSI_B]: [NSNumber numberWithInt:kVK_ANSI_N],
+    [NSNumber numberWithInt:kVK_ANSI_V]: [NSNumber numberWithInt:kVK_ANSI_M],
+    [NSNumber numberWithInt:kVK_ANSI_C]: [NSNumber numberWithInt:kVK_ANSI_Comma],
+    [NSNumber numberWithInt:kVK_ANSI_X]: [NSNumber numberWithInt:kVK_ANSI_Period],
+    [NSNumber numberWithInt:kVK_ANSI_Z]: [NSNumber numberWithInt:kVK_ANSI_Slash],
   };
 }
 
-CGEventRef flip(CGEventRef event) {
+CGEventRef flip(BOOL flipped, CGEventRef event) {
 
   CGKeyCode keycode = (CGKeyCode)CGEventGetIntegerValueField(event, kCGKeyboardEventKeycode);
   NSNumber *keynum = [NSNumber numberWithInt:keycode];
-  if ( [flipMap objectForKey:keynum] ) {
-    NSNumber *flippedKeynum = flipMap[keynum];
-    CGKeyCode flippedKeycode = [flippedKeynum intValue];
-    CGEventSetIntegerValueField(event, kCGKeyboardEventKeycode, (int64_t)flippedKeycode);
+  if ( flipped ) {
+    if ( [flipMap objectForKey:keynum] ) {
+      NSNumber *flippedKeynum = flipMap[keynum];
+      CGKeyCode flippedKeycode = [flippedKeynum intValue];
+      CGEventSetIntegerValueField(event, kCGKeyboardEventKeycode, (int64_t)flippedKeycode);
+    }
+  } else {
+    if ( [unflipMap objectForKey:keynum] ) {
+      NSNumber *flippedKeynum = unflipMap[keynum];
+      CGKeyCode flippedKeycode = [flippedKeynum intValue];
+      CGEventSetIntegerValueField(event, kCGKeyboardEventKeycode, (int64_t)flippedKeycode);
+    }
   }
 
   return event;
@@ -137,9 +153,9 @@ CGEventRef eventTapFunction(CGEventTapProxy proxy, CGEventType type, CGEventRef 
     if ( type == kCGEventKeyDown ) {
       nonSpaceTyped = YES;
     }
-    return flip(event);
+    return flip(true,event);
   } else {
-    return event;
+    return flip(false,event);
   }
 }
 
