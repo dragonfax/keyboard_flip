@@ -309,9 +309,21 @@ CFMutableDictionaryRef myCreateDeviceMatchingDictionary( UInt32 usagePage,  UInt
     return dict;
 }
 
+void signalHandler(int sig) {
+  exit(1);
+}
+
 
 int main(void)
 {
+
+  signal(SIGHUP, signalHandler);
+  signal(SIGINT, signalHandler);
+  signal(SIGSTOP, signalHandler);
+  signal(SIGKILL, signalHandler);
+  signal(SIGQUIT, signalHandler);
+  signal(SIGTERM, signalHandler);
+
     initializeFlipMap();
 
     IOHIDManagerRef hidManager = IOHIDManagerCreate( kCFAllocatorDefault, kIOHIDOptionsTypeNone );
@@ -332,7 +344,7 @@ int main(void)
 
     IOHIDManagerScheduleWithRunLoop( hidManager, CFRunLoopGetMain(), kCFRunLoopDefaultMode );
 
-    // IOReturn r = IOHIDManagerOpen( hidManager, kIOHIDOptionsTypeSeizeDevice);
+    // IOReturn r = IOHIDManagerOpen( hidManager, kIOHIDOptionsTypeNone);
     IOReturn r = IOHIDManagerOpen( hidManager, kIOHIDOptionsTypeSeizeDevice);
     if ( r != kIOReturnSuccess ) {
       printf("failure to open device in exclusive %x", err_get_code(r));
