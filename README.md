@@ -12,9 +12,9 @@ While this command is running it intercepts **all** input from the keyboard and 
 
 Execute the following in terminal to compile and execute the tool.
 
-    clang -framework Foundation -framework coregraphics keyboard_flip.m
+  `clang  -framework coreFoundation  -framework IOKit -framework Foundation -framework coregraphics  keyboard_flip.m  -o hid`
 
-    sudo ./a.out
+  `sudo ./hid`
 
 ### Learning
 
